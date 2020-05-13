@@ -34,6 +34,7 @@ public class JwtAuthenticationController {
 		authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 		final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 		final String token = jwtTokenUtil.generateToken(userDetails);
+		System.out.println("Token Expiration===>>"+jwtTokenUtil.getExpirationDateFromToken(token));
 		return ResponseEntity.ok(new JwtResponse(token));
 	}
 	
