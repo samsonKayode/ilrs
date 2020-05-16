@@ -14,6 +14,7 @@ import com.imo.landregistry.dao.LandRepository;
 import com.imo.landregistry.dao.OwnerRepository;
 import com.imo.landregistry.entity.LandEntity;
 import com.imo.landregistry.entity.OwnerEntity;
+import com.imo.landregistry.exceptions.ActionResult;
 
 @RequestMapping("/lrs/owner/data")
 @RestController
@@ -36,7 +37,9 @@ public class OwnerRestController {
 	//save owner details..
 	
 	@PostMapping("/list/{land_id}")
-	public LandEntity saveData(@RequestBody OwnerEntity ownerEntity, @PathVariable Integer land_id) {
+	public ActionResult saveData(@RequestBody OwnerEntity ownerEntity, @PathVariable Integer land_id) {
+		
+		ActionResult actionResult=null;
 		
 		LandEntity landEntity = landRepo.getOne(land_id);
 		
@@ -44,9 +47,14 @@ public class OwnerRestController {
 		
 		landEntity.addOwner(ownerEntity);
 		
-		ownerRepo.save(ownerEntity);
-		
-		return landEntity;
+		try {
+			ownerRepo.save(ownerEntity);
+			actionResult = new ActionResult (0, "success", System.currentTimeMillis());
+		}catch(Exception nn) {
+			actionResult = new ActionResult (0, "error"+"/n"+nn.getMessage(), System.currentTimeMillis());
+		}
+
+		return actionResult;
 	}
 
 }
