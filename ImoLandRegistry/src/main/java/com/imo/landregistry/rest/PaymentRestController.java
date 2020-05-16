@@ -23,20 +23,8 @@ public class PaymentRestController {
 	
 	//verify access code and title id.. returns integer
 	
-	@GetMapping("/data/{title_id}/{access_code}")
+	@GetMapping("/data/list/{title_id}/{access_code}")
 	public ActionResult verifyData (@PathVariable String title_id, @PathVariable String access_code) {
-		
-		/*
-		ActionResult result;
-		try {
-			result = paymentService.verifyPayment(title_id, access_code);
-		}
-		catch(Exception nn) {
-			
-			System.out.println("No Data Found");
-			result = null;
-		}
-		*/
 		
 		return paymentService.verifyPayment(title_id, access_code);
 	}
