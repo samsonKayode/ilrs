@@ -2,6 +2,8 @@ package com.imo.landregistry.entity;
 
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -41,6 +44,9 @@ public class LandEntity implements Serializable {
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="landEntity")
 	private OwnerEntity ownerEntity;
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="landEntity")
+	private Set<LoanEntity> loanEntity;
 
 	
 	public LandEntity() {
@@ -102,6 +108,14 @@ public class LandEntity implements Serializable {
 		this.ownerEntity = ownerEntity;
 	}
 	
+	public Set<LoanEntity> getLoanEntity() {
+		return loanEntity;
+	}
+
+	public void setLoanEntity(Set<LoanEntity> loanEntity) {
+		this.loanEntity = loanEntity;
+	}
+
 	public void addOwner(OwnerEntity tempOwner) {
 		
 		if(ownerEntity==null) {
@@ -109,6 +123,15 @@ public class LandEntity implements Serializable {
 		}
 		ownerEntity=tempOwner;
 		tempOwner.setLandEntity(this);
+	}
+	
+	public void addLoans(LoanEntity tempLoan) {
+		
+		if(loanEntity==null) {
+			loanEntity = new HashSet<>();
+		}
+		loanEntity.add(tempLoan);
+		tempLoan.setLandEntity(this);		
 	}
 	
 	

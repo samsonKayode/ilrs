@@ -23,11 +23,15 @@ public class LandRestController {
 	@Autowired
 	OwnerRepository ownerRepo;
 	
+	//show land details
+	
 	@GetMapping("/list")
 	public List<LandEntity> showAllLands(){
 		
 		return landRepo.findAll();
 	}
+	
+	//save land details..
 	
 	@PostMapping("/list")
 	public void saveData(@RequestBody LandEntity landEntity) {

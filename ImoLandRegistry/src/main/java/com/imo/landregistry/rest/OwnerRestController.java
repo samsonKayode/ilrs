@@ -33,6 +33,8 @@ public class OwnerRestController {
 		return ownerRepo.findAll();
 	}
 	
+	//save owner details..
+	
 	@PostMapping("/list/{land_id}")
 	public LandEntity saveData(@RequestBody OwnerEntity ownerEntity, @PathVariable Integer land_id) {
 		
