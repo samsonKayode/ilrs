@@ -125,6 +125,7 @@ public class OwnerEntity implements Serializable {
 		return landEntity;
 	}
 
+	//important data.
 
 	public void setLandEntity(LandEntity landEntity) {
 		this.landEntity = landEntity;
