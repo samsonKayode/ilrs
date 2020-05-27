@@ -90,8 +90,6 @@ public class InitializeTransactionRequest {
     	
     }
 
-
-
     public String getEmail() {
         return email;
     }

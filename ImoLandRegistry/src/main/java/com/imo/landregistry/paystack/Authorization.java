@@ -110,8 +110,4 @@ public class Authorization {
 	public void setCountry_code(String country_code) {
 		this.country_code = country_code;
 	}
-	
-	
-
-
 }

@@ -2,6 +2,9 @@ package com.imo.landregistry.dao;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Date;
+
+import javax.persistence.EntityManager;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -9,11 +12,15 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.imo.landregistry.entity.PaymentEntity;
+import com.imo.landregistry.paystack.Data;
 import com.imo.landregistry.paystack.InitializeTransactionRequest;
 import com.imo.landregistry.paystack.InitializeTransactionResponse;
 import com.imo.landregistry.paystack.VerifyTransactionResponse;
@@ -24,6 +31,14 @@ public class InitPaymentImpl implements InitPayment {
 	private static final int STATUS_CODE_OK = 200;
 	@Value("${paystack.testkey}")
 	private String secretKey;
+	
+	Data data;
+	
+	@Autowired
+	EntityManager entityManager;
+	
+	@Autowired
+	PaymentRepository paymentRepo;
 
 	@Override
 	public InitializeTransactionResponse startPayment(InitializeTransactionRequest request) {
@@ -100,8 +115,32 @@ public class InitPaymentImpl implements InitPayment {
             throw new Exception("An error occurred while  verifying payment");
         } else if (paystackresponse.getData().getStatus().equals("success")) {
            System.out.println("verification complete!!!");
+           
+           data = paystackresponse.getData();
+           
+           if(data.getGateway_response().equals("Successful")) { 
+        	   
+        	   savePaystackRecord("JA/1192/UUYUW/UW232", data.getReference(), "samsonkayode@gmail.com", new Date());
+        	   
+           }
         }
+
+		System.out.println("PAYMENT STATUS::====>"+ data.getGateway_response());
 		
         return paystackresponse;
 	}
+	
+	//save successful payment to database..
+	
+	@Override
+	@Transactional
+	public void savePaystackRecord(String title_id, String access_code, String payer, Date date) {
+		
+		PaymentEntity paymentEntity = new PaymentEntity(title_id, access_code, payer, date);
+		
+		paymentRepo.save(paymentEntity);
+		
+	}
+	
+	
 }

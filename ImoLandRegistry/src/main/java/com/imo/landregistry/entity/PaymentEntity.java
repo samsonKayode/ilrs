@@ -1,5 +1,7 @@
 package com.imo.landregistry.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,19 +25,29 @@ public class PaymentEntity {
 	private String access_code;
 	
 	@Column(name="date")
-	private String date;
+	private Date date;
 	
 	@Column(name="payer")
 	private String payer;
 	
 	public PaymentEntity() {}
 
-	public PaymentEntity(String title_id, String access_code, String date, String payer) {
+	/*
+	public PaymentEntity(String title_id, String access_code, String payer, Date date) {
+		this.title_id = title_id;
+		this.access_code = access_code;
+		this.payer = payer;
+	}
+	*/
+	
+	public PaymentEntity(String title_id, String access_code, String payer, Date date) {
 		this.title_id = title_id;
 		this.access_code = access_code;
 		this.date = date;
 		this.payer = payer;
 	}
+	
+	
 
 	public int getId() {
 		return id;
@@ -61,11 +73,11 @@ public class PaymentEntity {
 		this.access_code = access_code;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
