@@ -9,6 +9,8 @@ public interface InitPaymentService {
 	public InitializeTransactionResponse startPayment(InitializeTransactionRequest request);
 	
 	public VerifyTransactionResponse verifyTransaction(String reference);
+	
+	public VerifyTransactionResponse verifyTransactionToSave(String reference, String email, String title_id) throws Exception;
 
 
 }

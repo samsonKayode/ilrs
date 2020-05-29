@@ -73,7 +73,7 @@ public class InitializeTransactionRequest {
     /**
      * Extra information to be saved with this transaction
      */
-    //private MetaData metadata;
+    private MetaData metadata;
 
     /**
      * A flat fee to charge the subaccount for this transaction, in kobo.
@@ -131,6 +131,7 @@ public class InitializeTransactionRequest {
     public void setBearer(PaystackBearer bearer) {
         this.bearer = bearer;
     }
+    */
     
     public MetaData getMetadata() {
         return metadata;
@@ -140,7 +141,6 @@ public class InitializeTransactionRequest {
         this.metadata = metadata;
     }
     
-    */
 
     public String getCallback_url() {
         return callback_url;

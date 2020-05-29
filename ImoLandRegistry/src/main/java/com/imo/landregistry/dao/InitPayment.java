@@ -13,5 +13,7 @@ public interface InitPayment {
 	public VerifyTransactionResponse verifyTransaction(String reference) throws Exception;
 
 	void savePaystackRecord(String title_id, String access_code, String payer, Date date);
+	
+	public VerifyTransactionResponse verifyTransactionToSave(String reference, String email, String title_id) throws Exception;
 
 }

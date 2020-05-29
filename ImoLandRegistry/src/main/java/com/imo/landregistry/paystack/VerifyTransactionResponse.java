@@ -24,6 +24,8 @@ public class VerifyTransactionResponse {
      * contains details about the transaction
      */
     private Data data;
+    
+    private MetaData metadata;
 
     public VerifyTransactionResponse() {
     }
@@ -51,5 +53,13 @@ public class VerifyTransactionResponse {
     public void setData(Data data) {
         this.data = data;
     }
+
+	public MetaData getMetadata() {
+		return metadata;
+	}
+
+	public void setMetadata(MetaData metadata) {
+		this.metadata = metadata;
+	}
 
 }

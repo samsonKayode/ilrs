@@ -45,5 +45,24 @@ public class PayStackPaymentController {
 		
 		return response;
 	}
+	
+	@GetMapping("/verifytransaction/{reference}/{email}/{title_id}")
+	public String verifyPaymentToSave(@PathVariable String reference, @PathVariable String email, @PathVariable String title_id) {
+		
+		VerifyTransactionResponse response=null;
+		String str="";
+		
+		try {
+			
+			response = paymentService.verifyTransactionToSave(reference, email, title_id);
+			str = "OK";
+		}
+		catch(Exception ee) {
+			System.out.println("Error verifying payment");
+			str="ERROR";
+		}
+		
+		return str;
+	}
 
 }

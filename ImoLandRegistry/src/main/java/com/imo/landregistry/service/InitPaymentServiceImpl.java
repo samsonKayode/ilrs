@@ -39,4 +39,18 @@ public class InitPaymentServiceImpl implements InitPaymentService {
 		return initResponse;
 	}
 
+	@Override
+	public VerifyTransactionResponse verifyTransactionToSave(String reference, String email, String title_id)
+			throws Exception {
+		VerifyTransactionResponse initResponse=null;
+		
+		try {
+			initResponse = initPayment.verifyTransactionToSave(reference, email, title_id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block 
+			e.printStackTrace();
+		}
+		return initResponse;
+	}
+
 }
