@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.imo.landregistry.paystack.InitializeTransactionRequest;
 import com.imo.landregistry.paystack.InitializeTransactionResponse;
@@ -43,26 +44,29 @@ public class PayStackPaymentController {
 			System.out.println("Error verifying payment");
 		}
 		
+		
+		
 		return response;
 	}
 	
 	@GetMapping("/verifytransaction/{reference}/{email}/{title_id}")
-	public String verifyPaymentToSave(@PathVariable String reference, @PathVariable String email, @PathVariable String title_id) {
+	public RedirectView verifyPaymentToSave(@PathVariable String reference, @PathVariable String email, 
+			@PathVariable String title_id) {
 		
-		VerifyTransactionResponse response=null;
-		String str="";
+		RedirectView redirectView = new RedirectView();
 		
 		try {
 			
-			response = paymentService.verifyTransactionToSave(reference, email, title_id);
-			str = "OK";
+			paymentService.verifyTransactionToSave(reference, email, title_id);
+			redirectView.setUrl("http://localhost:8081/lrs/success");
 		}
 		catch(Exception ee) {
 			System.out.println("Error verifying payment");
-			str="ERROR";
+			
+			redirectView.setUrl("http://localhost:8081/lrs/failed");
 		}
 		
-		return str;
+		return redirectView;
 	}
-
+	
 }

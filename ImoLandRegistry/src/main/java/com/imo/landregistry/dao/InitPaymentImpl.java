@@ -140,10 +140,10 @@ public class InitPaymentImpl implements InitPayment {
            
            if(data.getGateway_response().equals("Successful")) { 
         	   
-        	   String title = titleID;
-        	   String email = customerEmail;
+        	   //String title = titleID;
+        	   //String email = customerEmail;
 
-        	   savePaystackRecord(title, data.getReference(), email, new Date());
+        	   //savePaystackRecord(title, data.getReference(), email, new Date());
         	   
            }
         }
@@ -201,7 +201,7 @@ public class InitPaymentImpl implements InitPayment {
            
            data = paystackresponse.getData();
            
-           if(data.getGateway_response().equals("Successful")) { 
+           if(data.getStatus().equals("success")) { 
 
         	   savePaystackRecord(title_id, data.getReference(), email, new Date());
         	   
