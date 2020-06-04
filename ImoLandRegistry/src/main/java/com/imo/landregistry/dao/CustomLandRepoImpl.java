@@ -17,8 +17,6 @@ public class CustomLandRepoImpl implements CustomLandRepo {
 	@Override
 	public LandEntity getSingleLand(String title_id) {
 		
-		String query;
-		
 		LandEntity landEntity = null;
 		
 		try {
