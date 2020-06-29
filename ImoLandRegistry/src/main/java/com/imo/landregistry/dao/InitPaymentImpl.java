@@ -148,7 +148,7 @@ public class InitPaymentImpl implements InitPayment {
            }
         }
 
-		System.out.println("PAYMENT STATUS::====>"+ data.getGateway_response());
+		//System.out.println("PAYMENT STATUS::====>"+ data.getGateway_response());
 		
         return paystackresponse;
 	}

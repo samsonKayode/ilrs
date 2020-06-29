@@ -9,7 +9,7 @@
 	</parent>
   <groupId>com.imo.landregistry</groupId>
   <artifactId>landRegistry</artifactId>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <name>landRegistry</name>
   <url>http://maven.apache.org</url>
@@ -65,12 +65,26 @@
       <artifactId>spring-boot-starter-web-services</artifactId>
     </dependency>
 		
-		<!-- MSSQL -->
+		
+		<!-- MSSQL
 		<dependency>
 		    <groupId>com.microsoft.sqlserver</groupId>
 		    <artifactId>mssql-jdbc</artifactId>
 		    <scope>runtime</scope>
 		</dependency>
+		
+		-->
+		
+		
+		
+		<!-- MYSQL -->
+		<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <scope>runtime</scope>
+	</dependency>
+	
+	
 		
 		<!--  JSON Web Toolkit -->
 		
